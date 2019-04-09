@@ -1,18 +1,19 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/2723376/55211710-2f76e000-5228-11e9-887b-67faca78c4b9.png" width="150" height="150" /></p>
 
-<h1 align="center">react-monaco-editor</h1>
+<h1 align="center">react-monaco-hooks</h1>
 
 <div align="center">
 
 [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
+<h4 align="center">Based on "react-monaco-editor"</h4>
+
+
 [![NPM version][npm-image]][npm-url]
-[![Downloads][downloads-image]][npm-url]
-[![Build Status](https://travis-ci.org/superRaytin/react-monaco-editor.svg?branch=master)](https://travis-ci.org/superRaytin/react-monaco-editor)
 
-[![react-monaco-editor](https://nodei.co/npm/react-monaco-editor.png)](https://npmjs.org/package/react-monaco-editor)
+[![react-monaco-editor](https://nodei.co/npm/react-monaco-hooks.png)](https://npmjs.org/package/react-monaco-hooks)
 
-[npm-url]: https://npmjs.org/package/react-monaco-editor
+[npm-url]: https://npmjs.org/package/react-monaco-hooks
 [downloads-image]: http://img.shields.io/npm/dm/react-monaco-editor.svg
 [npm-image]: http://img.shields.io/npm/v/react-monaco-editor.svg
 
