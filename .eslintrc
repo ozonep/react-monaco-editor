@@ -15,9 +15,7 @@
     "jsx-a11y/href-no-hash": 0,
     "react/destructuring-assignment": 0
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "globals": {
     "monaco": true
   },
@@ -25,6 +23,6 @@
     "browser": true
   },
   "react": {
-    "version": "detect"
+    "version": "16.8.6"
   }
 }

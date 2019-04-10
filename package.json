@@ -7,13 +7,13 @@
   "jsnext:main": "src/index.js",
   "types": "src/index.d.ts",
   "scripts": {
-    "preversion": "npm run lint",
+    "preversion": "yarn lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "format": "prettier-eslint --write src/**/*",
     "lint": "prettier-eslint --list-different src/**/*",
-    "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "test": "npm run test:typescript",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "test": "yarn test:typescript",
     "test:typescript": "typings-tester --dir test/typescript"
   },
   "keywords": [
