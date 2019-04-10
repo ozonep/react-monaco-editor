@@ -5,8 +5,8 @@ import {MonacoEditor, MonacoDiffEditor} from 'react-monaco-hooks';
 
 
 function CodeEditor(props) {
- const [code, setCode] = useState('// type your code... \n');
- let editor;
+ let [code, setCode] = useState('// type your code... \n');
+ let editor = {};
 
  const onChange = (newValue, e) => {
    console.log('onChange', newValue, e);
@@ -75,7 +75,7 @@ const App = () => (
     <CodeEditor />
     <hr />
     <h2>Another editor (uncontrolled mode)</h2>
-    <AnotherEditor />
+    {/*<AnotherEditor />*/}
   </div>
 );
 

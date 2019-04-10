@@ -28,10 +28,10 @@ module.exports = {
       }
     ],
   },
-  resolve: {
-    extensions: ['.js', '.json'],
-    alias: { 'react-monaco-editor': MonacoEditorSrc }
-  },
+  // resolve: {
+  //   extensions: ['.js', '.json'],
+  //   alias: { 'react-monaco-hooks': MonacoEditorSrc }
+  // },
   plugins: [
     new MonacoWebpackPlugin({
       languages: ['json', 'javascript', 'typescript']

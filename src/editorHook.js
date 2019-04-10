@@ -6,8 +6,8 @@ const noop = () => {};
 const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
 
 function MonacoEditor({ width, height, ...props }) {
-  const containerElement = useRef(undefined);
-  let editor;
+  const containerElement = useRef(null);
+  let editor = {};
   let preventTriggerChangeEvent = false;
 
   const editorWillMount = () => {
