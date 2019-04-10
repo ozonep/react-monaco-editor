@@ -5,16 +5,13 @@
   "main": "lib/index.js",
   "module": "lib/index",
   "jsnext:main": "src/index.js",
-  "types": "src/index.d.ts",
   "scripts": {
     "preversion": "yarn lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "format": "prettier-eslint --write src/**/*",
     "lint": "prettier-eslint --list-different src/**/*",
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "test": "yarn test:typescript",
-    "test:typescript": "typings-tester --dir test/typescript"
+    "prepublishOnly": "yarn lint && yarn build"
   },
   "keywords": [
     "monaco",
@@ -44,15 +41,12 @@
     "eslint-plugin-react": "^7.12.4",
     "prettier-eslint-cli": "^4.7.1",
     "react": "^16.8.6",
-    "rimraf": "^2.6.3",
-    "typescript": "^3.4.2",
-    "typings-tester": "^0.3.2"
+    "rimraf": "^2.6.3"
   },
   "peerDependencies": {
     "react": "^16.x"
   },
   "dependencies": {
-    "@types/react": "^16.8.13",
     "monaco-editor": "^0.16.2",
     "prop-types": "^15.7.2"
   }

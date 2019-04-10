@@ -9,8 +9,6 @@
 <h4 align="center">Based on "react-monaco-editor"</h4>
 
 
-[![NPM version][npm-image]][npm-url]
-
 [![react-monaco-editor](https://nodei.co/npm/react-monaco-hooks.png)](https://npmjs.org/package/react-monaco-hooks)
 
 [npm-url]: https://npmjs.org/package/react-monaco-hooks
@@ -41,45 +39,41 @@ yarn add react-monaco-editor
 ## Using with Webpack
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
-import MonacoEditor from 'react-monaco-editor';
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom';
+import MonacoEditor from 'react-monaco-hooks';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: '// type your code...',
-    }
-  }
-  editorDidMount(editor, monaco) {
+function App(props) {
+  const [code, setCode] = useState('// type your code...');
+   
+  const editorDidMount = (editor, monaco) => {
     console.log('editorDidMount', editor);
     editor.focus();
-  }
-  onChange(newValue, e) {
+  };
+  
+  const onChange = (newValue, e) => {
     console.log('onChange', newValue, e);
-  }
-  render() {
-    const code = this.state.code;
-    const options = {
-      selectOnLineNumbers: true
-    };
-    return (
-      <MonacoEditor
-        width="800"
-        height="600"
-        language="javascript"
-        theme="vs-dark"
-        value={code}
-        options={options}
-        onChange={::this.onChange}
-        editorDidMount={::this.editorDidMount}
-      />
-    );
-  }
+  };
+  
+  const options = {
+    selectOnLineNumbers: true
+  };
+  
+  return (
+    <MonacoEditor
+      width="800"
+      height="600"
+      language="javascript"
+      theme="vs-dark"
+      value={code}
+      options={options}
+      onChange={onChange}
+      editorDidMount={editorDidMount}
+    />
+   );
 }
 
-render(
+ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
@@ -172,8 +166,8 @@ const value = model.getValue();
 For example, you may want to configure some JSON schemas before editor mounted, then you can go with `editorWillMount(monaco)`:
 
 ```js
-class App extends React.Component {
-    editorWillMount(monaco) {
+function App(props) {
+    const editorWillMount = (monaco) => {
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
             schemas: [{
                 uri: "http://myserver/foo-schema.json",
@@ -191,26 +185,26 @@ class App extends React.Component {
             }]
         });
     }
-    render() {
-        return (
-          <MonacoEditor language="json" editorWillMount={this.editorWillMount} />
-        );
-    }
+    return <MonacoEditor language="json" editorWillMount={editorWillMount} />;
 }
 ```
 
-### Use multiple themes
+### Available (built-in) themes:
+```
+"vs",
+"vs-dark",
+"hc-black"
+```
+[More themes can be found here](https://www.npmjs.com/package/monaco-themes)
 
-[Monaco only supports one theme](https://github.com/Microsoft/monaco-editor/issues/338).
 
 ### How to use the diff editor
 
 ```js
 import React from 'react';
-import { MonacoDiffEditor } from 'react-monaco-editor';
+import { MonacoDiffEditor } from 'react-monaco-hooks';
 
-class App extends React.Component {
-  render() {
+function App(props) {
     const code1 = "// your original code...";
     const code2 = "// a different version...";
     const options = {
@@ -226,10 +220,5 @@ class App extends React.Component {
         options={options}
       />
     );
-  }
 }
 ```
-
-# License
-
-MIT, see the [LICENSE](/LICENSE.md) file for detail.
