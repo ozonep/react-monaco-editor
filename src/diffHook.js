@@ -1,9 +1,9 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
-import { processSize } from './utils'
 
-function noop() { }
+const noop = () => { };
+const processSize = size => /^\d+$/.test(size) ? `${size}px` : size;
 
 function MonacoDiffEditor({width, height, ...props}) {
     const containerElement = useRef(undefined);
@@ -41,7 +41,6 @@ function MonacoDiffEditor({width, height, ...props}) {
         if (editor) editor.layout();
     }, [width, height]);
 
-
     const editorWillMount = () => {
         const options = props.editorWillMount(monaco);
         return options || {};
@@ -57,7 +56,6 @@ function MonacoDiffEditor({width, height, ...props}) {
         });
     };
 
-
     const updateModel = (value, original) => {
         const originalModel = monaco.editor.createModel(original, props.language);
         const modifiedModel = monaco.editor.createModel(value, props.language);
@@ -66,7 +64,6 @@ function MonacoDiffEditor({width, height, ...props}) {
             modified: modifiedModel
         });
     };
-
 
     const initMonaco = () => {
         const value = props.value !== null ? props.value : props.defaultValue;
@@ -81,16 +78,12 @@ function MonacoDiffEditor({width, height, ...props}) {
     };
 
     const destroyMonaco = () => {
-        if (typeof editor !== 'undefined') {
-            this.editor.dispose();
-        }
+        if (typeof editor !== 'undefined') editor.dispose();
     };
 
-    const fixedWidth = processSize(width);
-    const fixedHeight = processSize(height);
     const style = {
-        width: fixedWidth,
-        height: fixedHeight
+        width: processSize(width),
+        height: processSize(height)
     };
     return <div ref={containerElement} style={style} className="react-monaco-editor-container" />;
 }

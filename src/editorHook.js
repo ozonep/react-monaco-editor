@@ -1,9 +1,9 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef} from 'react';
-import { processSize } from './utils';
 
-function noop() { }
+const noop = () => { };
+const processSize = size => /^\d+$/.test(size) ? `${size}px` : size;
 
 function MonacoEditor({width, height, ...props}) {
     const containerElement = useRef(undefined);
@@ -76,11 +76,9 @@ function MonacoEditor({width, height, ...props}) {
         });
     };
 
-    const fixedWidth = processSize(width);
-    const fixedHeight = processSize(height);
     const style = {
-        width: fixedWidth,
-        height: fixedHeight
+        width: processSize(width),
+        height: processSize(height)
     };
     return <div ref={containerElement} style={style} className="react-monaco-editor-container" />;
 }

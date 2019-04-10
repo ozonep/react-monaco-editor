@@ -1,35 +1,34 @@
 {
   "name": "react-monaco-editor-browser-example",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Monaco Editor for React",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --progress --colors --port 8886"
   },
   "authors": [
-    "Leon Shi <superRaytin@gmail.com>",
-    "Dominik Moritz <domoritz@gmail.com>"
+    "Ivan Malkov <ozonep@yandex.ru>"
   ],
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-env": "^2.4.1",
-    "babel-loader": "^7.1.4",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
-    "monaco-editor-webpack-plugin": "^1.6.0",
+    "monaco-editor-webpack-plugin": "^1.7.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.0"
   },
   "dependencies": {
-    "react": "~16.7.0",
-    "react-dom": "^16.6.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-monaco-editor": "latest"
   }
 }

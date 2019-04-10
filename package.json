@@ -27,10 +27,10 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ozonep/react-monaco-editor/issues"
+    "url": "https://github.com/ozonep/react-monaco-hooks/issues"
   },
-  "homepage": "https://github.com/ozonep/react-monaco-editor",
-  "repository": "https://github.com/ozonep/react-monaco-editor",
+  "homepage": "https://github.com/ozonep/react-monaco-hooks",
+  "repository": "https://github.com/ozonep/react-monaco-hooks",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
