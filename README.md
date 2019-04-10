@@ -33,7 +33,7 @@ Then open `http://localhost:8886` in a browser.
 ## Installation
 
 ```bash
-yarn add react-monaco-editor
+yarn add react-monaco-hooks
 ```
 
 ## Using with Webpack
