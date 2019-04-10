@@ -1,17 +1,16 @@
 {
   "name": "react-monaco-hooks",
-  "version": "0.26.3",
+  "version": "0.26.4",
   "description": "Monaco Editor for React based on hooks + other optimizations",
   "main": "lib/index.js",
   "module": "lib/index",
   "jsnext:main": "src/index.js",
   "scripts": {
-    "preversion": "yarn lint",
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "format": "prettier-eslint --write src/**/*",
     "lint": "prettier-eslint --list-different src/**/*",
-    "prepublishOnly": "yarn lint && yarn build"
+    "prepublishOnly": "yarn build"
   },
   "keywords": [
     "monaco",
