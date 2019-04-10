@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
 import React from 'react';
-import { render } from 'react-dom';
-// eslint-disable-next-line import/no-unresolved, import/extensions
-import MonacoEditor from 'react-monaco-editor';
-/* eslint-enable import/no-extraneous-dependencies */
+import ReactDOM from 'react-dom';
+import {MonacoEditor, MonacoDiffEditor} from 'react-monaco-hooks';
 
-// Using with webpack
+
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -110,11 +108,12 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
     const { code } = this.state;
     return (
       <div>
-        <MonacoEditor
+        <MonacoDiffEditor
           width="800"
           height="600"
           language="json"
           defaultValue={code}
+          theme="vs-dark"
           editorWillMount={this.editorWillMount}
         />
       </div>
@@ -122,7 +121,6 @@ class AnotherEditor extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-// eslint-disable-next-line react/no-multi-comp
 const App = () => (
   <div>
     <h2>Monaco Editor Sample (controlled mode)</h2>
@@ -133,7 +131,7 @@ const App = () => (
   </div>
 )
 
-render(
+ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
