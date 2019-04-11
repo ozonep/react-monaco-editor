@@ -1,7 +1,5 @@
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin-updated');
 const path = require('path');
-
-const MonacoEditorSrc = path.join(__dirname, '..', 'src');
 
 module.exports = {
   entry: './index.js',
@@ -28,10 +26,6 @@ module.exports = {
       }
     ],
   },
-  // resolve: {
-  //   extensions: ['.js', '.json'],
-  //   alias: { 'react-monaco-hooks': MonacoEditorSrc }
-  // },
   plugins: [
     new MonacoWebpackPlugin({
       languages: ['json', 'javascript', 'typescript']

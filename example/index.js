@@ -1,20 +1,23 @@
 /* eslint-disable */
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import {MonacoEditor, MonacoDiffEditor} from 'react-monaco-hooks';
+import MonacoEditor from 'react-monaco-hooks';
 
+let editor;
 
 function CodeEditor(props) {
- let [code, setCode] = useState('// type your code... \n');
- let editor = {};
+ const [code, setCode] = useState('// type your code... \n');
+ const [theme, setTheme] = useState('vs-dark');
 
- const onChange = (newValue, e) => {
+ const onChange = (newValue, e, monaco) => {
    console.log('onChange', newValue, e);
+   setCode(newValue);
+   editor = monaco;
  };
 
-  const editorDidMount = (editorr) => {
-    console.log('editorDidMount', editorr, editorr.getValue(), editorr.getModel());
-    editor = editorr;
+  const editorDidMount = (monaco) => {
+    console.log('editorDidMount', monaco.getValue());
+    editor = monaco;
   };
 
   const changeEditorValue = () => {
@@ -22,7 +25,11 @@ function CodeEditor(props) {
   };
 
   const changeBySetState = () => {
-    setCode('// code changed by setState! \n');
+      setCode('// code changed by setState! \n');
+  };
+
+  const changeTheme = () => {
+      setTheme('vs');
   };
 
   const options = {
@@ -37,44 +44,45 @@ function CodeEditor(props) {
         <div>
           <button onClick={changeEditorValue} type="button">Change value</button>
           <button onClick={changeBySetState} type="button">Change by setState</button>
+            <button onClick={changeTheme} type="button">Change theme</button>
         </div>
         <hr />
         <MonacoEditor
-          height="500"
+          height="700"
           language="javascript"
           value={code}
           options={options}
           onChange={onChange}
-          theme="vs-dark"
+          theme={theme}
           editorDidMount={editorDidMount}
         />
       </div>
     );
 }
 
-function AnotherEditor(props) {
-  const code1 = "// your original code...";
-  const code2 = "// a different version...";
-  return (
-      <div>
-        <MonacoDiffEditor
-          width="800"
-          height="600"
-          language="javascript"
-          theme="vs-dark"
-          original={code1}
-          value={code2}
-        />
-      </div>
-    );
-}
+// function AnotherEditor(props) {
+//   const code1 = "// your original code...";
+//   const code2 = "// a different version...";
+//   return (
+//       <div>
+//         <MonacoDiffEditor
+//           width="800"
+//           height="600"
+//           language="javascript"
+//           theme="vs-dark"
+//           original={code1}
+//           value={code2}
+//         />
+//       </div>
+//     );
+// }
 
 const App = () => (
   <div>
     <h2>Monaco Editor Sample (controlled mode)</h2>
     <CodeEditor />
     <hr />
-    <h2>Another editor (uncontrolled mode)</h2>
+    {/*<h2>Another editor (uncontrolled mode)</h2>*/}
     {/*<AnotherEditor />*/}
   </div>
 );

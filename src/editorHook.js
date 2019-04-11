@@ -1,48 +1,46 @@
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import {editor} from "monaco-editor";
 import PropTypes from "prop-types";
 import React, { useEffect, useRef } from "react";
 
 const noop = () => {};
 const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
 
+let monaco;
+let monacoModel;
+
 function MonacoEditor({ width, height, ...props }) {
   const containerElement = useRef(null);
-  let editor = {};
   let preventTriggerChangeEvent = false;
 
-  const editorWillMount = () => {
-    const options = props.editorWillMount(monaco);
-    return options || {};
-  };
-
-  const editorDidMount = editor => {
-    props.editorDidMount(editor, monaco);
-    editor.onDidChangeModelContent(event => {
-      const value = editor.getValue();
+  const editorDidMount = monaco => {
+    props.editorDidMount(monaco);
+    monaco.onDidChangeModelContent(event => {
+      const value = monaco.getValue();
       if (!preventTriggerChangeEvent) {
-        props.onChange(value, event);
+        props.onChange(value, event, monaco);
       }
     });
   };
 
   const initMonaco = () => {
+    console.log("initMonaco1", monaco);
     const value = props.value !== null ? props.value : props.defaultValue;
     const { language, theme, options } = props;
     if (containerElement.current) {
-      Object.assign(options, editorWillMount());
-      editor = monaco.editor.create(containerElement.current, {
+      monaco = editor.create(containerElement.current, {
         value,
         language,
         ...options
       });
-      if (theme) monaco.editor.setTheme(theme);
-      editorDidMount(editor);
+      monacoModel = monaco.getModel();
+      if (theme) editor.setTheme(theme);
+      editorDidMount(monaco);
     }
   };
 
   const destroyMonaco = () => {
-    if (typeof editor !== "undefined") {
-      editor.dispose();
+    if (typeof monaco !== "undefined") {
+      monaco.dispose();
     }
   };
 
@@ -52,43 +50,44 @@ function MonacoEditor({ width, height, ...props }) {
   }, []);
 
   useEffect(
-    () => {
-      if (editor) {
-        preventTriggerChangeEvent = true;
-        editor.setValue(props.value);
-        preventTriggerChangeEvent = false;
-      }
-    },
-    [props.value]
+      () => {
+        if (monaco) {
+          preventTriggerChangeEvent = true;
+          // monacoModel.setValue(props.value);
+          preventTriggerChangeEvent = false;
+        }
+      },
+      [props.value]
   );
 
   useEffect(
-    () => {
-      monaco.editor.setModelLanguage(editor.getModel(), props.language);
-    },
-    [props.language]
+      () => {
+        editor.setModelLanguage(monaco.getModel(), props.language);
+      },
+      [props.language]
   );
 
   useEffect(
-    () => {
-      monaco.editor.setTheme(props.theme);
-    },
-    [props.theme]
+      () => {
+        editor.setTheme(props.theme);
+      },
+      [props.theme]
   );
 
   useEffect(
-    () => {
-      editor.updateOptions(props.options);
-    },
-    [props.options]
+      () => {
+        if (monaco) monaco.updateOptions(props.options);
+      },
+      [props.options]
   );
 
   useEffect(
-    () => {
-      if (editor) editor.layout();
-    },
-    [width, height]
+      () => {
+        if (monaco) monaco.layout();
+      },
+      [width, height]
   );
+
 
   const style = {
     width: processSize(width),
@@ -112,7 +111,6 @@ MonacoEditor.propTypes = {
   theme: PropTypes.string,
   options: PropTypes.object,
   editorDidMount: PropTypes.func,
-  editorWillMount: PropTypes.func,
   onChange: PropTypes.func
 };
 
@@ -125,7 +123,6 @@ MonacoEditor.defaultProps = {
   theme: null,
   options: {},
   editorDidMount: noop,
-  editorWillMount: noop,
   onChange: noop
 };
 

@@ -7,7 +7,7 @@ const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
 
 function MonacoDiffEditor({ width, height, ...props }) {
   const containerElement = useRef(undefined);
-  let editor = {};
+  let editor;
   let preventTriggerChangeEvent = false;
 
   const editorWillMount = () => {

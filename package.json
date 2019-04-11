@@ -8,8 +8,6 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "format": "prettier-eslint --write src/**/*",
-    "lint": "prettier-eslint --list-different src/**/*",
     "prepublishOnly": "yarn build"
   },
   "keywords": [
@@ -33,12 +31,6 @@
     "babel-env": "^2.4.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "prettier-eslint-cli": "^4.7.1",
     "react": "^16.8.6",
     "rimraf": "^2.6.3"
   },
