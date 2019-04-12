@@ -5,3 +5,5 @@
 .eslintignore
 .gitignore
 .npmignore
+/src/diffHook.js
+/src/test.js

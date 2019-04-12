@@ -1,46 +1,63 @@
-import {editor} from "monaco-editor";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from "prop-types";
 import React, { useEffect, useRef } from "react";
 
 const noop = () => {};
 const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
 
-let monaco;
-let monacoModel;
+let editor = null;
+let data = {
+  javascript: {
+    model: null,
+    state: null
+  },
+  css: {
+    model: null,
+    state: null
+  },
+  html: {
+    model: null,
+    state: null
+  },
+  python: {
+    model: null,
+    state: null
+  }
+};
 
-function MonacoEditor({ width, height, ...props }) {
+function MonacoEditor(props) {
   const containerElement = useRef(null);
   let preventTriggerChangeEvent = false;
+  const { language, theme, options, width, height } = props;
+  let value = props.value !== null ? props.value : props.defaultValue;
 
-  const editorDidMount = monaco => {
-    props.editorDidMount(monaco);
-    monaco.onDidChangeModelContent(event => {
-      const value = monaco.getValue();
+
+  const editorDidMount = model => {
+    props.editorDidMount(model);
+    editor.onDidChangeModelContent(event => {
+      const value = model.getValue();
       if (!preventTriggerChangeEvent) {
-        props.onChange(value, event, monaco);
+        props.onChange(value, event, model);
       }
     });
   };
 
   const initMonaco = () => {
-    console.log("initMonaco1", monaco);
-    const value = props.value !== null ? props.value : props.defaultValue;
-    const { language, theme, options } = props;
     if (containerElement.current) {
-      monaco = editor.create(containerElement.current, {
-        value,
-        language,
+      editor = monaco.editor.create(containerElement.current, {
+        model: null,
         ...options
       });
-      monacoModel = monaco.getModel();
-      if (theme) editor.setTheme(theme);
-      editorDidMount(monaco);
+      data[language].model = monaco.editor.createModel(value, language);
+      editor.setModel(data[language].model);
+      if (theme) monaco.editor.setTheme(theme);
+      editorDidMount(data[language].model);
     }
   };
 
   const destroyMonaco = () => {
-    if (typeof monaco !== "undefined") {
-      monaco.dispose();
+    if (typeof editor !== "undefined") {
+      editor.dispose();
     }
   };
 
@@ -49,41 +66,60 @@ function MonacoEditor({ width, height, ...props }) {
     return () => destroyMonaco();
   }, []);
 
-  useEffect(
-      () => {
-        if (monaco) {
+  useEffect(() => {
+        if (data[language].model) {
           preventTriggerChangeEvent = true;
-          // monacoModel.setValue(props.value);
+          data[language].model.pushEditOperations(
+              [],
+              [
+                {
+                  range: data[language].model.getFullModelRange(),
+                  text: value,
+                },
+              ]
+          );
           preventTriggerChangeEvent = false;
         }
       },
-      [props.value]
+      [value]
   );
 
-  useEffect(
-      () => {
-        editor.setModelLanguage(monaco.getModel(), props.language);
+  useEffect(() => {
+    let currentState = editor.saveViewState();
+    let currentModel = editor.getModel();
+    if (currentModel === data.javascript.model) {
+      data.javascript.state = currentState;
+    } else if (currentModel === data.css.model) {
+      data.css.state = currentState;
+    } else if (currentModel === data.html.model) {
+      data.html.state = currentState;
+    } else if (currentModel === data.python.model) {
+      data.python.state = currentState;
+    }
+    if (!data[language].model) data[language].model = monaco.editor.createModel(value, language);
+    editor.setModel(data[language].model);
+    editor.restoreViewState(data[language].state);
+    editor.focus();
+    props.editorDidMount(data[language].model);
+    },
+      [language]
+  );
+
+  useEffect(() => {
+        monaco.editor.setTheme(props.theme);
       },
-      [props.language]
+      [theme]
   );
 
   useEffect(
       () => {
-        editor.setTheme(props.theme);
+        if (editor) editor.updateOptions(props.options);
       },
-      [props.theme]
+      [options]
   );
 
-  useEffect(
-      () => {
-        if (monaco) monaco.updateOptions(props.options);
-      },
-      [props.options]
-  );
-
-  useEffect(
-      () => {
-        if (monaco) monaco.layout();
+  useEffect(() => {
+        if (editor) editor.layout();
       },
       [width, height]
   );

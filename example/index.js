@@ -8,6 +8,7 @@ let editor;
 function CodeEditor(props) {
  const [code, setCode] = useState('// type your code... \n');
  const [theme, setTheme] = useState('vs-dark');
+ const [lang, setLang] = useState('css');
 
  const onChange = (newValue, e, monaco) => {
    console.log('onChange', newValue, e);
@@ -32,6 +33,11 @@ function CodeEditor(props) {
       setTheme('vs');
   };
 
+  const changeLang = (lang) => {
+      console.log('Pressing button to change lang');
+      setLang(lang);
+  };
+
   const options = {
     selectOnLineNumbers: true,
     roundedSelection: false,
@@ -45,11 +51,14 @@ function CodeEditor(props) {
           <button onClick={changeEditorValue} type="button">Change value</button>
           <button onClick={changeBySetState} type="button">Change by setState</button>
             <button onClick={changeTheme} type="button">Change theme</button>
+            <button onClick={() => changeLang('css')} type="button">CSS</button>
+            <button onClick={() => changeLang('html')} type="button">HTML</button>
+            <button onClick={() => changeLang('javascript')} type="button">Javascript</button>
         </div>
         <hr />
         <MonacoEditor
           height="700"
-          language="javascript"
+          language={lang}
           value={code}
           options={options}
           onChange={onChange}

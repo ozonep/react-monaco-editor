@@ -28,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new MonacoWebpackPlugin({
-      languages: ['json', 'javascript', 'typescript']
+      languages: ['javascript', 'typescript', 'css', 'html', 'python']
     }),
   ],
   devServer: { contentBase: './' },
