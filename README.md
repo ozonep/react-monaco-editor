@@ -2,6 +2,9 @@
 
 <div align="center">
 
+# WIP! Created for internal use in my projects.
+# For now it's in Pre-Alpha stage. May be broken :) 
+
 [Monaco Editor](https://github.com/Microsoft/monaco-editor) for React.
 
 <h4 align="center">Based on "react-monaco-editor"</h4>

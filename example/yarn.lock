@@ -3915,10 +3915,10 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-monaco-hooks@^0.27.2:
-  version "0.27.2"
-  resolved "https://registry.yarnpkg.com/react-monaco-hooks/-/react-monaco-hooks-0.27.2.tgz#975763dfd065a9edbf228a893dec947ed0be9634"
-  integrity sha512-xO68nP6gKIF88F5QZ6gexcXXXZkS/3FbWl8H/UEGuHP0r2Q9taUZ3sJuG8KEvW1evVUI/DDk1OXrnoGwnmLXyw==
+react-monaco-hooks@^0.27.3:
+  version "0.27.3"
+  resolved "https://registry.yarnpkg.com/react-monaco-hooks/-/react-monaco-hooks-0.27.3.tgz#eb68a6b988a7467589b4022e668e81e74916cbdc"
+  integrity sha512-uNV9LIWD3i0CSLUN5fkIwSx7MQ0iP4ZzzHsSyPD9raiNSg8KV85KT+/bxIj25wYokNUYq02EYvr3o/lo1sZrUw==
   dependencies:
     monaco-editor "^0.16.2"
     prop-types "^15.7.2"
