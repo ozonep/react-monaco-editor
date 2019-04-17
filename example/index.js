@@ -44,7 +44,7 @@ function CodeEditor(props) {
     roundedSelection: false,
     readOnly: false,
     cursorStyle: 'line',
-    automaticLayout: true,
+    automaticLayout: false,
   };
   return (
       <div>

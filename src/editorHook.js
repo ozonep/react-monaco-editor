@@ -1,9 +1,9 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import PropTypes from "prop-types";
 import React, { useEffect, useRef } from "react";
+import {processSize} from "./utils";
 
 const noop = () => {};
-const processSize = size => (/^\d+$/.test(size) ? `${size}px` : size);
 
 let editor = null;
 let data = {
