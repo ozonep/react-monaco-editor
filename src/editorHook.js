@@ -31,8 +31,12 @@ function MonacoEditor(props) {
   const { language, theme, options, width, height } = props;
   let value = props.value !== null ? props.value : props.defaultValue;
 
+  const updateDimensions = () => {
+    editor.layout();
+  };
 
   const editorDidMount = model => {
+    window.addEventListener("resize", updateDimensions);
     props.editorDidMount(model);
     editor.onDidChangeModelContent(event => {
       const value = model.getValue();
@@ -57,6 +61,7 @@ function MonacoEditor(props) {
 
   const destroyMonaco = () => {
     if (typeof editor !== "undefined") {
+      window.removeEventListener("resize", updateDimensions);
       editor.dispose();
     }
   };

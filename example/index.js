@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import MonacoEditor from 'react-monaco-hooks';
+import './example.css';
 
 let editor;
 
@@ -43,19 +44,20 @@ function CodeEditor(props) {
     roundedSelection: false,
     readOnly: false,
     cursorStyle: 'line',
-    automaticLayout: false,
+    automaticLayout: true,
   };
   return (
       <div>
         <div>
-          <button onClick={changeEditorValue} type="button">Change value</button>
-          <button onClick={changeBySetState} type="button">Change by setState</button>
+            <button onClick={changeEditorValue} type="button">Change value</button>
+            <button onClick={changeBySetState} type="button">Change by setState</button>
             <button onClick={changeTheme} type="button">Change theme</button>
-            <button onClick={() => changeLang('css')} type="button">CSS</button>
-            <button onClick={() => changeLang('html')} type="button">HTML</button>
-            <button onClick={() => changeLang('javascript')} type="button">Javascript</button>
+            <ul className="tabs group">
+                <li onClick={() => changeLang('html')}><a className={lang === 'html' ? 'active' : null} href="#">HTML</a></li>
+                <li onClick={() => changeLang('css')}><a className={lang === 'css' ? 'active' : null} href="#">CSS</a></li>
+                <li onClick={() => changeLang('javascript')}><a className={lang === 'javascript' ? 'active' : null} href="#">Javascript</a></li>
+            </ul>
         </div>
-        <hr />
         <MonacoEditor
           height="700"
           language={lang}
@@ -90,9 +92,6 @@ const App = () => (
   <div>
     <h2>Monaco Editor Sample (controlled mode)</h2>
     <CodeEditor />
-    <hr />
-    {/*<h2>Another editor (uncontrolled mode)</h2>*/}
-    {/*<AnotherEditor />*/}
   </div>
 );
 
