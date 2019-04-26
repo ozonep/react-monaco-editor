@@ -1,6 +1,6 @@
 {
   "name": "react-monaco-hooks",
-  "version": "0.27.13",
+  "version": "0.27.14",
   "description": "Monaco Editor for React based on hooks + other optimizations",
   "main": "lib/index.js",
   "module": "lib/index",
@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "monaco-editor": "^0.16.2",
+    "prettier": "^1.17.0",
     "prop-types": "^15.7.2"
   }
 }
