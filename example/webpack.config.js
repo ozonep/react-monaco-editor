@@ -12,6 +12,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.worker\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'worker-loader',
+          options: {
+            name: '[name].[hash].js',
+          },
+        },
+      },
+      {
         test: /\.html$/,
         use: ['file?name=[name].[ext]'],
       },
@@ -35,4 +45,4 @@ module.exports = {
   node: {
     fs: 'empty'
   }
-}
+};
